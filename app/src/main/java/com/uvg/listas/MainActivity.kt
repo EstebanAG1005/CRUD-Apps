@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity(),Adaptador.ItemsViewHolder.ClickListener
 
 
     private val adaptador = Adaptador(this)
-    val items : MutableList<Noticia> = mutableListOf()
+    private val items : MutableList<Noticia> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(),Adaptador.ItemsViewHolder.ClickListener
     }
     override fun onItemLongClicked(position: Int) : Boolean{
         val aux = Noticia(
-                "Actualizando"
+                titulo = "Actualizando"
         )
         adaptador.reload(position,aux)
         return true

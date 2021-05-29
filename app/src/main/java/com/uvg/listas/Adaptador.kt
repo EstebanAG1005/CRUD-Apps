@@ -3,10 +3,11 @@ package com.uvg.listas
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_lista.view.*
 
-class Adaptador(private val clickListener: ItemsViewHolder.ClickListener): RecyclerView.Adapter<Adaptador.ItemsViewHolder>() {
+public class Adaptador(private val listener: ItemsViewHolder.ClickListener):
+        RecyclerView.Adapter<Adaptador.ItemsViewHolder>() {
 
     private var items: MutableList<Noticia> = mutableListOf()
 
@@ -16,12 +17,11 @@ class Adaptador(private val clickListener: ItemsViewHolder.ClickListener): Recyc
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        val item = items[position]
-        holder.bind(item, clickListener)
+        holder.bind(items[position],listener)
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return this.items.size
     }
 
     fun setItems(nuevosItems: MutableList<Noticia>){
@@ -44,7 +44,10 @@ class Adaptador(private val clickListener: ItemsViewHolder.ClickListener): Recyc
 
     class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(item: Noticia, listener: ClickListener) = with(itemView) {
-            txtTitulo.text = item.toString()
+
+            val txtTitulo: TextView = findViewById(R.id.txtTitulo)
+
+            txtTitulo.text = item.titulo
 
             setOnClickListener {
                 listener.onItemClicked(adapterPosition)
